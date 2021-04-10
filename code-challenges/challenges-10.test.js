@@ -88,29 +88,11 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 ------------------------------------------------------------------------------------------------ */
 
 const divisibleByFiveTwoToThePower = (input) => {
-let r = [];
-  for (let i = 0; i < input.length; i++) {
 
-    r += input[i].filter((n, j) => {
-      let type = typeof n;
-      let b = (type === ('number') && n % 5 === 0);
-      return b;
-    });
-  }
-  console.log(r);
+  let arr = input.map(element => element.filter(value => typeof (value) === 'number' && !(value % 5)));
+  let results = arr.map(value => value.map(elem => Math.pow(2, elem)));
+  return results;
 
-
-
-
-
-  let removed = input.filter((n, i) => {
-    let type = typeof n;
-    let b = (type === ('number') && n[i] % 5 === 0);
-    
-    return b;
-  });
-  
-  return r;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -177,6 +159,15 @@ let starWarsData = [{
 
 let findMaleAndFemale = (data) => {
 
+  let arr = data.filter(value => {
+    if (value.gender !== 'n/a') {
+      console.log(value.name);
+      return value.name;
+    }
+  }).map(element => element.name).join(' and ');
+
+  return arr;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -186,7 +177,10 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 ------------------------------------------------------------------------------------------------ */
 
 let findShortest = (data) => {
-  // Solution code here...
+
+  let shortest = data.sort((a,b) => a.height - b.height );
+  return shortest[0].name;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
